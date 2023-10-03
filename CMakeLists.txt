@@ -16,7 +16,6 @@ set(CMAKE_BUILD_TYPE Release)
 include(GNUInstallDirs)
 list(APPEND CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_FULL_LIBDIR})
 
-
 find_package(CUDAToolkit)
 find_package(cudawrappers 0.5.0 REQUIRED cu nvrtc)
 
