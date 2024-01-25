@@ -2,6 +2,9 @@ name: build
 
 on:
   push:
+    branches:
+      #- main
+      - add_build_action
   workflow_dispatch:
 
 jobs:
