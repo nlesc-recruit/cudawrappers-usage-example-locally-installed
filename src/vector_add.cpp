@@ -7,7 +7,7 @@ void vector_add() {
   size_t bytesize = N * sizeof(float);
 
   cu::Device device(0);
-  cu::Context context(CU_CTX_SCHED_BLOCKING_SYNC, device);
+  cu::Context context(hipDeviceScheduleBlockingSync, device);
 
   cu::HostMemory h_a(bytesize);
   cu::HostMemory h_b(bytesize);
