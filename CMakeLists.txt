@@ -17,13 +17,13 @@ set(CMAKE_HIP_COMPILER_ENV_VAR "HIPCXX")
 # Use CMAKE_INSTALL_PREFIX when searching for libraries to run the installed
 # vector_add_example program.
 include(GNUInstallDirs)
-include_directories("/var/software/opt/rocm-6.0.2/include")
 
 list(APPEND CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_FULL_LIBDIR})
 
 # find_package(CUDAToolkit)
-find_package(cudawrappers 0.6.0 REQUIRED cu nvrtc)
+find_package(cudawrappers REQUIRED cu nvrtc)
 
+set_source_files_properties(src/vector_add.cpp PROPERTIES LANGUAGE HIP)
 add_executable(vector_add_example src/vector_add.cpp)
 
 target_link_libraries(vector_add_example PRIVATE cudawrappers::cu
