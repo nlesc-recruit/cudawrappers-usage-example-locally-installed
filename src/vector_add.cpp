@@ -13,9 +13,9 @@ void vector_add() {
   cu::HostMemory h_b(bytesize);
   cu::HostMemory h_c(bytesize);
 
-  float *a = (float *)h_a;
-  float *b = (float *)h_b;
-  float *c = (float *)h_c;
+  float* a = (float*)h_a;
+  float* b = (float*)h_b;
+  float* c = (float*)h_c;
   for (int i = 0; i < N; i++) {
     a[i] = 1.0;
     b[i] = 1.0;
@@ -43,18 +43,18 @@ void vector_add() {
 
   try {
     program.compile(options);
-  } catch (nvrtc::Error &error) {
+  } catch (nvrtc::Error& error) {
     std::cerr << program.getLog();
     throw;
   }
 
-  cu::Module module(static_cast<const void *>(program.getPTX().data()));
+  cu::Module module(static_cast<const void*>(program.getPTX().data()));
 
   cu::Function function(module, "vector_add");
 
   // call kernel
-  std::vector<const void *> parameters = {d_c.parameter(), d_a.parameter(),
-                                          d_b.parameter(), &N};
+  std::vector<const void*> parameters = {d_c.parameter(), d_a.parameter(),
+                                         d_b.parameter(), &N};
 
   my_stream.launchKernel(function, 1, 1, 1, 1024, 1, 1, 0, parameters);
 
@@ -65,11 +65,11 @@ void vector_add() {
   std::cout << "hurray! " << c[0] << " \n";
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   try {
     cu::init();
     vector_add();
-  } catch (cu::Error &error) {
+  } catch (cu::Error& error) {
     std::cerr << "cu::Error: " << error.what() << std::endl;
   }
 }
